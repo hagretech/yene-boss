@@ -1,0 +1,308 @@
+.danger {
+	color: red;
+}
+
+.container {
+	margin: 0;
+	padding: 15px;
+}
+
+.side_nav {
+	position: fixed;
+	width: 30%;
+	height: 100vh;
+	background: #4e86b6;
+}
+
+.side_nav ul {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20vh;
+	list-style: none;
+	padding: 10px;
+}
+
+.side_nav ul li {
+	font-size: 25px;
+	font-weight: bolder;
+	padding: 10px 0;
+}
+
+.side_nav ul li i {
+	margin: 10px;
+}
+
+.side_nav ul li i.emg {
+	color: #c73838;
+}
+
+.side_nav ul li a {
+	color: black;
+}
+
+.side_nav .top_nav {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+
+}
+
+.side_nav .top_nav li {
+	margin: 3px;
+	padding: 0;
+	font-size: 15px;
+
+}
+
+.side_nav .top_nav li:nth-child(2) {
+	border-bottom: 2px solid black;
+}
+
+.main {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 70%;
+	padding: 20px 20px 20px 50px;
+
+}
+
+.main h2 {
+	margin-bottom: 30px;
+}
+
+.main form {
+	width: 100%;
+	margin-top: 50px;
+}
+
+.main form .form_div {
+	display: flex;
+	margin: 20px 10px;
+}
+
+.main form .form_div p {
+	width: 30%;
+	font-size: 20px;
+	text-transform: capitalize;
+	color: #488ec9;
+}
+
+.main form .form_div input,
+textarea {
+	border: 1px solid #488ec9;
+	width: 60%;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.main form .or {
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	padding: 0px;
+}
+
+.main form button {
+	margin: 10px;
+	margin-left: 10px;
+	padding: 10px 30px;
+}
+
+.patients_results {
+	width: 100%;
+}
+
+.main ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+}
+
+.main ul a {
+	width: 100%;
+}
+
+.main ul li {
+	width: 100%;
+}
+
+.main .patient ul li {
+	width: 100%;
+	margin: 0px 10px 10px 10px;
+	border-bottom: 1px solid;
+	padding: 10px 20px;
+}
+
+.main ul .patient li:nth-child(2n) {
+	background: #e0e0e0;
+}
+
+.main form select {
+	border: 1px solid #488ec9;
+	width: 60%;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.main form lable {
+	width: 30%;
+	font-size: 20px;
+	text-transform: capitalize;
+	color: #488ec9;
+}
+
+/* 
+doctor style
+*/
+.doctor h5 {
+	color: white;
+}
+
+.history_list ul:nth-child(2) li h5 {
+	color: black;
+}
+
+.doctor form .form_div input {
+	border: 1px solid #488ec9;
+	width: 60%;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+div.container.main.doctor div.patient_data div.form_div {
+	margin: 20px;
+}
+
+div.container.main.doctor div.patient_data div.form_div input.form {
+	border: 1px solid #488ec9;
+	width: 60%;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.doctor .radio {
+	width: 100%;
+	margin: 0;
+	page-break-after: 0;
+	margin: 30px 0;
+}
+
+.doctor .radio h2 {
+	text-align: center;
+	color: #4e86b6;
+	margin: 10px;
+}
+
+.doctor .radio p {
+	caption-side: black;
+	margin: 0px 0px 30px 20px
+}
+
+.doctor .radio ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.doctor .radio ul li {
+	width: 50%;
+	margin: 10px 0;
+	color: #104d81;
+}
+
+.doctor .history_list h3 {
+	margin: 40px 0;
+}
+
+.doctor .history_list ul {
+	width: 100%;
+}
+
+.doctor .history_list ul li {
+	width: 80%;
+	border: 1px solid #1c67a7;
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+/* 
+admin styles
+*/
+.admin_nav {
+	background: #d89842;
+
+}
+
+.admin_nav ul li a {
+	color: white;
+}
+
+.admin h1,
+h2,
+h3,
+h4,
+h5 {
+	color: #d89842
+}
+
+.admin ul {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 100px;
+}
+
+.admin ul li {
+	width: 80%;
+	border: 1px solid #d89842;
+	margin: 20px;
+	border-radius: 5px;
+	padding: 20px;
+	transition: 0.5s ease;
+	height: 330px;
+	position: relative;
+}
+
+.admin ul li div {
+	background: #d89842;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	padding-top: 2px;
+}
+
+.admin ul li h3 {
+	margin: 0 10px 20px 10px;
+	padding: 0;
+}
+
+.admin ul li span {
+	margin: 10px 20px;
+}
+
+.admin_li_anmi {
+	height: 115px !important;
+	overflow: hidden;
+}
+
+
+.admin ul li p .secutity {
+	width: 20px;
+	height: 20px;
+	background: #4ec738;
+}
+
+.admin ul li div {
+	display: flex;
+}
+
+.admin ul li div a {
+	width: 20%;
+	margin: 10px;
+	padding: 5px;
+}
