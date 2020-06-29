@@ -1,0 +1,56 @@
+.main-cont{
+    display: flex
+}
+.main-cont .dashboard{
+	width: 20%;
+    background: #464646;
+    height: 100vh;
+}
+input{
+    width 70%;
+    border: 1px solid #5cb85c;
+    border-radius: 5px 0 0 5px;
+    margin: 0;
+}
+.btn{
+    border-radius: 0 5px 5px 0;
+    margin: 0;
+    width: 30%;
+}
+form{
+    display: flex;
+}
+header h2{
+    background: #adadad;
+    margin: 0;
+    padding: 10px;
+    text-align: center
+}
+.main{
+    margin-top:20px;
+}
+.main .kanbanCont{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.main .kanbanCont .kanban{
+    width:250px;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px
+}
+.main .kanbanCont .kanban h3{
+    text-align: center
+}
+.main .kanbanCont .kanban div{
+    margin: 10px 0;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #5cb85c;
+    border-radius: 5px;
+}
+.main .addkanban form{
+	margin:20px 10px 100px 50px;
+}

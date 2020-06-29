@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/index_kanban.css">
+</head>
+
+<body>
+
+    <header>
+        <h2>kanban bord</h2>
+    </header>
+    <div class="main-cont">
+        <div class="dashboard">
+            <ul>
+                <li><a href="">rojects</a></li>
+                <li><a href="">rojects</a></li>
+                <li><a href="">rojects</a></li>
+            </ul>
+        </div>
+        <div class="main">
+        <ul class="kanbanCont">
+            {% for kanban in kanbans %}
+            <li class="kanban">
+
+                <h3 draggable="true">{{ kanban.name }}</h3>
+                <form action="/addTask/{{kanban.id}}" method="post">
+                    <input name='taskName' type="text" required>
+                    <button class="btn btn-success ">+ Task</button>
+                </form>
+                {% for task in kanban.tasks %}
+                <div draggable="true" class="task">{{ task.content }}</div>
+                {% endfor %}
+
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="addkanban">
+            <form action="/addKanban/{{id}}" method="post">
+                <input type="text" name="kanbanName" required>
+                <button class="btn btn-primary kanbanAdder">+ Kanban</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    <div class="main">
+        <ul class="kanbanCont">
+            {% for kanban in kanbans %}
+            <li class="kanban">
+
+                <h3 draggable="true">{{ kanban.name }}</h3>
+                <form action="/addTask/{{kanban.id}}" method="post">
+                    <input name='taskName' type="text" required>
+                    <button class="btn btn-success ">+ Task</button>
+                </form>
+                {% for task in kanban.tasks %}
+                <div draggable="true" class="task">{{ task.content }}</div>
+                {% endfor %}
+
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="addkanban">
+            <form action="/addKanban/{{id}}" method="post">
+                <input type="text" name="kanbanName" required>
+                <button class="btn btn-primary kanbanAdder">+ Kanban</button>
+            </form>
+        </div>
+    </div>
+    <script src="../static/lib/jquery/jquery.min.js">
+    </script>
+    <script src="../static/js/main_kanban.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+h1,
+h2,
+h3 {
+    padding-left: 20px;
+}
+.main-cont{
+    display: flex
+}
+.main-cont .dashboard{
+	width: 20%;
+    background: #464646;
+    height: 100vh;
+}
+header h2 {
+    background: #c3c3c3;
+    margin: 0;
+    padding: 20px 10px 10px
+}
+
+ul {
+    margin-bottom: 20px;
+    list-style: circle
+}
+
+ul li {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+ul li div{
+    padding-left: 30px;
+}
+ul li div .btn{
+    padding: 10px;
+    width: 80px;
+    font-size: 14px
+}
+ul li a:nth-child(1){
+    align-items: center
+}
+form{
+    display: flex;
+    align-items: center;
+}
+form input {
+    border:1px solid #9ea792;
+    border-radius: 6px;
+    padding:5px ;
+    margin:0  20px 0 40px;
+}

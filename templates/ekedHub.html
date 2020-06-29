@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/style_ekedHub.css">
+</head>
+
+<body>
+
+    <header>
+        <h2>eked organizer</h2>
+    </header>
+     <div class="main-cont">
+            <div class="dashboard">
+                <ul>
+                    <li><a href="">rojects</a></li>
+                    <li><a href="">rojects</a></li>
+                    <li><a href="">rojects</a></li>
+                </ul>
+            </div>
+            <div class="main">
+                <div class="search">
+        <input type="text" class="ekedName">
+        <i class="fa fa-search"></i>
+    </div>
+    <div class="ekeds">
+        <form method='post' action='/saveEked/{{id}}'>
+            <ul>
+                {% for eked in ekeds%}
+                <li>
+                    <h4>{{eked.content}} progresss {{eked.progress}}</h4>
+                    <input type="checkbox" name='{{eked.id}}'>
+                    <div>
+                        <a href="/deleteEked/{{eked.id}}" class="btn btn-danger">delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div>
+                <button class="btn btn-primary" type='submit'> save </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="addEked">
+        <form method='post' action='/addEked/{{id}}'>
+            <i>add</i>
+            <input type="text" name='content' class="ekedName">
+        </form>
+    </div>
+            </div>
+        </div>
+    
+    <script src="../static/lib/jquery/jquery.min.js">
+    </script>
+    <script src="../static/js/main_ekedHub.js"></script>
+
+</body>
+
+</html>

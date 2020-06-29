@@ -1,0 +1,60 @@
+
+input{
+    margin: 20px;
+    border-color: #cec8c8;
+    border-radius: 5px;
+}
+.main-cont{
+    display: flex
+}
+.main-cont .dashboard{
+	width: 20%;
+    background: #464646;
+    height: 100vh;
+}
+header{
+    background: #464646;
+}
+header h2{
+    margin: 0;
+    padding: 15px;
+    color: white
+}
+.search {
+	display: flex;
+    align-items: center;
+    position: relative;
+}
+.search i{
+    position: absolute;
+    left: 190px;
+}
+.search input{
+
+}
+.ekeds {
+    margin: 20px 30px ;
+}
+.ekeds ul{
+    padding: 0;
+    margin-bottom: 100px
+}
+
+.ekeds ul li{
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between
+}
+.ekeds ul li h4{
+}
+.addEked{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #272727;
+}
