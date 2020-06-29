@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <div class="main-cont">
+        <header>
+            <h2>task details</h2>
+        </header>
+        <div class="main container">
+            <h3>task: {{task.name}}</h3>
+            <h3>content: "{{task.content}}"</h3>
+            <h3>range {{task.t_range}}</h3>
+            <h3>prgress {{task.progress}}</h3>
+        </div>
+        <div class="container timer_cont">
+            <div class='timer'>
+                <div class="min">00</div>min: <div class="sec">00</div>sec
+            </div>
+
+            <div class="buttons">
+                <span class="btn btn-success">start</span>
+                <span class="btn btn-danger">stop</span>
+            </div>
+            <div class="restartCont">
+                <span class="restart btn btn-primary">restart</span>
+            </div>
+        </div>
+        <footer>
+            <p>developed by kirubel </p>
+        </footer>
+        <form action="/progress/{{task.id}}" method='post' class='progress_form'>
+            <input type="number" class="form_input" value='1' name="time">
+            <p>save your </p><button type="submit" class="btn  btn-success">save</button>
+        </form>
+    </div>
+
+    <script src="../static/lib/jquery/jquery.min.js">
+    </script>
+    <script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
