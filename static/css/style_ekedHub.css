@@ -32,15 +32,15 @@ header h2{
 .search input{
 
 }
-.ekeds {
+.tasks {
     margin: 20px 30px ;
 }
-.ekeds ul{
+.tasks ul{
     padding: 0;
     margin-bottom: 100px
 }
 
-.ekeds ul li{
+.tasks ul li{
     padding: 10px;
     margin: 20px 0;
     border: 1px solid black;
@@ -48,9 +48,9 @@ header h2{
     display: flex;
     justify-content: space-between
 }
-.ekeds ul li h4{
+.tasks ul li h4{
 }
-.addEked{
+.addTask{
     position: fixed;
     bottom: 0;
     width: 100%;

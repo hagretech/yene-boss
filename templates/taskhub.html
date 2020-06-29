@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <h2>eked organizer</h2>
+        <h2>task organizer</h2>
     </header>
      <div class="main-cont">
             <div class="dashboard">
@@ -24,20 +24,21 @@
             </div>
             <div class="main">
                 <div class="search">
-        <input type="text" class="ekedName">
+        <input type="text" class="taskName">
         <i class="fa fa-search"></i>
     </div>
-    <div class="ekeds">
-        <form method='post' action='/saveEked/{{id}}'>
+    <div class="tasks">
+        <form method='post' action='/saveTask/{{id}}'>
             <ul>
-                {% for eked in ekeds%}
-                <li>
-                    <h4>{{eked.content}} progresss {{eked.progress}}</h4>
-                    <input type="checkbox" name='{{eked.id}}'>
+                {% for task in tasks%}
+                <a href="/task/{{task.id}}"><li>
+                    <h4>{{task.content}} progresss {{task.progress}}</h4>
+                    <input type="checkbox" name='{{task.id}}'>
                     <div>
-                        <a href="/deleteEked/{{eked.id}}" class="btn btn-danger">delete</a>
+                        <a href="/deleteTask/{{task.id}}" class="btn btn-danger">delete</a>
                     </div>
                 </li>
+                </a>
                 {% endfor %}
             </ul>
             <div>
@@ -46,10 +47,24 @@
         </form>
     </div>
 
-    <div class="addEked">
-        <form method='post' action='/addEked/{{id}}'>
+    <div class="addTask">
+        <form method='post' action='/addTask/{{id}}'>
             <i>add</i>
-            <input type="text" name='content' class="ekedName">
+            <div>
+                <label for="content">content</label>
+                <input id='content' type="text" name='content' class="taskName">
+            </div>
+            <div>
+                <label for="name">name</label>
+                <input id='name' type="text" name='name' class="taskName">
+            </div>
+            <div>
+                <label for="t_range">time</label>
+                <input id='t_range' type="number" name='t_range' class="taskName">
+            </div>
+            <div>
+                <button type='submit'>add</button>
+            </div>
         </form>
     </div>
             </div>
@@ -57,7 +72,7 @@
     
     <script src="../static/lib/jquery/jquery.min.js">
     </script>
-    <script src="../static/js/main_ekedHub.js"></script>
+    <script src="../static/js/main_taskHub.js"></script>
 
 </body>
 

@@ -12,12 +12,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
 #######################################################
 
-
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     kanbans = db.relationship('Kanban', backref='project',lazy=True)
-    hubs = db.relationship('Ekedhub', backref='project',lazy=True)
+    hubs = db.relationship('Taskhub', backref='project',lazy=True)
     def __repr__(self):
         return self.name
     
@@ -25,12 +24,12 @@ class Project(db.Model):
 class Kanban(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
-    tasks = db.relationship('Task', backref='auther',lazy=True)
+    tasks = db.relationship('Todo', backref='kanban',lazy=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable= False)
     def __repr__(self):
         return self.name
     
-class Task(db.Model):
+class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(1000),nullable=False)
     date = db.Column(db.DateTime,default=datetime.utcnow)
@@ -40,23 +39,22 @@ class Task(db.Model):
         return self.title  
 ## database models
     
-class Ekedhub(db.Model):
+class Taskhub(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable= False)
-    ekeds = db.relationship('Eked', backref='hub',lazy=True)
+    tasks = db.relationship('Task', backref='hub',lazy=True)
     def __repr__(self):
         return self.content
-class Eked(db.Model):
+class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000), nullable=False)
     content = db.Column(db.String(1000),nullable=False)
     t_range = db.Column(db.Integer, nullable=False)
     progress = db.Column(db.Integer, nullable=False, default=0)
     date = db.Column(db.DateTime,default=datetime.utcnow)    
-    content = db.Column(db.String(1000), nullable=False)
     status = db.Column(db.Boolean, default=False)
-    hub_id = db.Column(db.Integer, db.ForeignKey('ekedhub.id'), nullable= False)
+    hub_id = db.Column(db.Integer, db.ForeignKey('taskhub.id'), nullable= False)
     def __repr__(self):
         return self.content
   
@@ -79,14 +77,16 @@ def kanban(id):
     kanbans = Project.query.filter_by(id=id).first().kanbans
     id = Project.query.filter_by(id=id).first().id
     return render_template('kanban.html', kanbans=kanbans,id = id)
-    
-@app.route('/ekeds/<int:id>', methods = ['GET','POST'])
-def ekedHub(id):
+
+## taskhub page
+@app.route('/tasks/<int:id>', methods = ['GET','POST'])
+def taskHub(id):
     id = id 
-    ekeds = Ekedhub.query.get(id).ekeds
-    return render_template('ekedhub.html', ekeds=ekeds, id = id)
+    if Taskhub.query.get(id):
+        tasks = Taskhub.query.get(id).tasks
+    return render_template('taskhub.html', tasks=tasks, id = id)
     
-    ## add project 
+## add project 
 @app.route('/addProject', methods=['POST'])
 def addProject():
     name = request.form.get('name')
@@ -94,11 +94,11 @@ def addProject():
     db.session.add(p)
     db.session.commit()
     return redirect('/')
-## add eked hub
+## add task hub
 @app.route('/addhub/<int:id>', methods=['POST'])
-def addEkedHub(id):
+def addTaskHub(id):
     name = request.form.get('name')
-    h = Ekedhub(name=name,project_id=id)
+    h = Taskhub(name=name,project_id=id)
     db.session.add(h)
     db.session.commit()
     return redirect('/project/%s'%id)
@@ -113,9 +113,9 @@ def addKanban(id):
     name =  Project.query.get(id).name
     return redirect('/project/%s'%id)
     
-## add task 
-@app.route('/addTask/<int:id>', methods=['POST'])
-def addTask(id):
+## add todo 
+@app.route('/addToDo/<int:id>', methods=['POST'])
+def addToDo(id):
     task = request.form.get('taskName')
     t = Task(content=task,kanban_id= id)
     db.session.add(t)
@@ -125,24 +125,26 @@ def addTask(id):
     id = Kanban.query.get(id).project_id
     return redirect('/kanban/%s'%id)
     
-    ## add eked
-@app.route('/addEked/<int:id>', methods=['POST'])
-def ekedAdder(id):
+## add task
+@app.route('/addTask/<int:id>', methods=['POST'])
+def addTask(id):
     content = request.form.get('content')
-    e = Eked(content = content,hub_id = id)
+    name = request.form.get('name')
+    t_range = request.form.get('t_range')
+    e = Task(content=content, name=name, t_range=t_range, hub_id = id)
     db.session.add(e)
     db.session.commit()
-    return redirect('/ekeds/%s'%id)
+    return redirect('/tasks/%s'%id)
     
-## save the eked progrsss
-@app.route('/saveEked/<int:id>', methods=['GET', 'POST'])
-def saveeked(id):
+## save the task progrsss
+@app.route('/saveTask/<int:id>', methods=['GET', 'POST'])
+def savetask(id):
     boom = ''
-    for i in Ekedhub.query.get(id).ekeds:   
+    for i in Taskhub.query.get(id).tasks:   
         if request.form.get(str(i.id)) == 'on' :
             i.progress = True
             db.session.commit()
-    return redirect('/ekeds/%s'%id)
+    return redirect('/tasks/%s'%id)
     
 ############################################################
     
@@ -159,49 +161,39 @@ def ProjectDelete(id):
     db.session.delete(p)
     db.session.commit()
     return redirect('/')
-    ## delete ekedhub
+## delete taskhub
 @app.route('/hubDelete/<int:id>')
-def ekedHubDelete(id):
-    e = Ekedhub.query.get(id)
+def taskHubDelete(id):
+    e = Taskhub.query.get(id)
     id = e.project.id
-    ekeds = e.ekeds
-    for i in ekeds:
+    tasks = e.tasks
+    for i in tasks:
         db.session.delete(i)
     db.session.delete(e)
     db.session.commit()
     return redirect('/project/%s'%id)
     
-## delete eked
-@app.route('/deleteEked/<int:id>')
-def deleteKanban(id):
-    e = Eked.query.get(id)
-    id = e.hub.id
-    db.session.delete(e)
+## delete task
+@app.route('/deleteTask/<int:id>')
+def deleteTask(id):
+    t = Task.query.get(id)
+    db.session.delete(t)
     db.session.commit()
-    return redirect('/ekeds/%s'%id)
-'''@app.route('/task/<int:id>', methods=['GET', 'POST'])
-def projectview(id):
+    return redirect('/tasks/%s'%id)
+
+## task page
+@app.route('/task/<int:id>', methods=['GET', 'POST'])
+def task_page(id):
     task = Task.query.get_or_404(id)
     return render_template('task.html', task=task)
 
-## add task 
-@app.route('/addTask/', methods=['POST'])
-def addTask():
-    name = request.form.get('name')
-    content = request.form.get('content')
-    t_range = int(request.form.get('t_range'))
-    t = Task(name=name, content=content, t_range=t_range)
-    db.session.add(t)
-    db.session.commit()
-    return redirect('/')'''
-
+## progress saver form 
 @app.route('/progress/<int:id>', methods=['POST'])
 def progress(id):
     task = Task.query.get(id)
     task.progress = request.form.get('time')
     db.session.commit()
     return redirect('/task/%s'%id)
-
 
 if __name__ == '__main__':
     db.create_all()

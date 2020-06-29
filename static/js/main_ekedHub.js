@@ -1,16 +1,16 @@
 //***************** GLOBAL Variables for the filtering *******************//
 
-let eked_cont = $('.ekeds ul'),
-    ekeds = $('.ekeds ul li'),
-    eked = $('.search .ekedName'),
+let task_cont = $('.tasks ul'),
+    tasks = $('.tasks ul li'),
+    task = $('.search .taskName'),
     result = [];
 
 // focus the enput when the page load up
 
-eked.focus()
+task.focus()
 // adding event lister on the input field
-for (const e of eked) {
-    eked.focus()
+for (const e of task) {
+    task.focus()
     e.addEventListener('keyup', checker);
 }
 
@@ -21,7 +21,7 @@ for (const e of eked) {
 // check if the letter found if true add it to results
 function checker() {
     result = []
-    for (const e of ekeds) {
+    for (const e of tasks) {
         if (e.innerHTML.indexOf(this.value) >= 0) {
             result.push(e)
         }
@@ -31,12 +31,12 @@ function checker() {
 
 // display the filter results
 function display() {
-    eked_cont.empty()
+    task_cont.empty()
     for (const r of result) {
-        eked_cont.append(r)
+        task_cont.append(r)
     }
     if (result.length < 1){
-        eked_cont.append('<p>no results</P>')
+        task_cont.append('<p>no results</P>')
     }
 }
 
