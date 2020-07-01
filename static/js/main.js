@@ -5,7 +5,7 @@ var min = $('.timer .min'),
     second = 0,
     minute = 0,
     restart = $('.restart'),
-    form_input = $('.container form .form_input'),
+    form_input = $('.main form .form_input'),
     on = true;
 
 
@@ -30,7 +30,7 @@ function upcounter() {
 
 start[0].onclick = function () {
     if (start.hasClass('on')) {
-        console.log ('error')
+        console.log('error')
     } else {
         start.addClass('on')
         mytimer = setInterval(upcounter, 1000)

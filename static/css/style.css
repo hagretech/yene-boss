@@ -1,109 +1,198 @@
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    justify-content: center
-}
-body *{
-    box-sizing:;
-    padding: 0;
-    margin: 0;
+header {
+    margin-bottom: 30px;
 }
 
-header{
-    padding: 10px;
-    padding-left: 10%;;
-    background:#53bec7;
-    
+header h2 {
+    margin: 0;
+    padding: 5px 4%;
+    font-size: 18px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #626262;
+    color: white;
+    border-bottom: 1px solid #3e897b;
+    z-index: 1;
 }
-header h1{
-    padding-top: 20px;
-    text-align: center;
-    background: #bababa;
-    padding: 0;
+
+.success{
+    background: #5da25d;
 }
-.projects h3{
-    padding-top:20px ;
-    
+.main-cont {
+    display: flex;
+
 }
-.projects ul{
+
+.main-cont .dashboard {
+    width: 20%;
+    background: #626262;
+    height: 100vh;
+}
+
+.main-cont .dashboard ul {
     list-style: none;
-    margin: 10px;
-}
-.projects ul li{
-    padding: 10px ;
-}
-.projects form{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.projects form div{
-    width:100%;
-    margin: 10px;
-    display: flex;
-}
-.projects form div label{
-    width: 30%;
-}
-.projects form div input{
-    width: 60%;
-}
-.projects form div textarea{
-    width:60%;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    width: 20%;
+    background: #626262;
+    height: 100vh;
 }
 
+.main-cont .dashboard ul li {
+    margin: 20px 0;
+}
 
-.main h3{
-    padding: 10px
+.main-cont .main {
+    width: 80%
+}
+
+.main-cont .main h3 {
+    margin: 0;
+    padding: 20px;
+}
+
+.main-cont .main ul {
+    list-style: none;
+    border: 1px solid black;
+    padding: 0;
+    margin: 10px 30px;
+}
+
+.main-cont .main ul li {
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.main-cont .main ul li p {
+    margin: 0;
+    padding: 10px 0;
+    margin-left: 1%;
+}
+
+.main-cont .main ul li .no {
+    width: 5%;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .name {
+    width: 15% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .hubs {
+    width: 10% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .pro {
+    width: 10% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .content {
+    width: 30% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .status {
+    width: 10% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .range {
+    width: 10% !important;
+    border-right: 1px solid black;
+}
+
+.main-cont .main ul li .delete {
+    width: 10%;
+}
+
+.main-cont form {
+    margin: 20px 30px;
+}
+
+/* the task style */
+.main .taskhub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .search {
+    margin-right: 60px;
+}
+
+.main .search input {
+    border-radius: 5px;
+}
+
+.main .search i {
+    margin-left: 5px;
+}
+
+.main .tasks form div {
+    margin-left: 30px;
+}
+
+.main .addTask {
+    position: fixed;
+    bottom: 0;
+    background: #626262;
+    width: 100%;
+}
+
+.main .addTask h2 {
+    color: white;
+}
+
+.main .addTask form {
+    display: flex;
+    color: black;
+}
+
+.main .addTask form div {
+    display: flex;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.main .addTask form div input,
+textarea {
+    margin-left: 10px;
+    background: #626262;
+    border: 1px solid black
+}
+
+/* the timer style sheet */
+.task{
+    margin: 10px 30px;
 }
 .timer_cont{
-    border:1px solid #969696;
-    margin: 10px;
-    border-radius: 10px;
+    width: 50%;
 }
-.timer{
+.timer {
     text-align: center;
     padding: 10px;
     font-size: 30px;
     display: flex;
     justify-content: center
 }
-.buttons{
+
+.buttons {
     text-align: center
 }
-.restartCont{
+
+.restartCont {
     display: flex;
     justify-content: center;
     margin: 20px;
 }
-form.progress_form{
+].main .progress_form{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #379ba3;
 }
-form.progress_form input{
+.main .progress_form input{
     display: none;
 }
-form.progress_form button{
-   margin-left: 10px;
-}
-footer{
-    background: #379ba3;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-}
-footer p{
-    text-align: center;
-    margin: 10px;
-    width: 100%;
-}
-
-	
-	
-	
-	
-	

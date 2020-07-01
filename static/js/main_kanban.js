@@ -1,4 +1,4 @@
-let tasks = $('.main .kanbanCont .kanban .task'),
+let tasks = $('.main .task'),
     kanbans = $('.main .kanbanCont .kanban'),
     headers = $('.main .kanbanCont .kanban h3');
 

@@ -6,12 +6,11 @@ from datetime import datetime
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-## the sql database confic
+# the sql database confic
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
-#######################################################
-
+# *********** models ********** #
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
@@ -20,7 +19,7 @@ class Project(db.Model):
     def __repr__(self):
         return self.name
     
-## database models
+# database models
 class Kanban(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -36,8 +35,8 @@ class Todo(db.Model):
     kanban_id = db.Column(db.Integer, db.ForeignKey('kanban.id'), nullable= False)
 
     def __repr__(self):
-        return self.title  
-## database models
+        return self.content  
+# database models
     
 class Taskhub(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,7 +44,7 @@ class Taskhub(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable= False)
     tasks = db.relationship('Task', backref='hub',lazy=True)
     def __repr__(self):
-        return self.content
+        return self.name
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000), nullable=False)
@@ -58,35 +57,37 @@ class Task(db.Model):
     def __repr__(self):
         return self.content
   
-################                          ################
+# ************ routes ************* # 
 
 @app.route('/', methods = ['GET','POST'])
 def home():
     projects = Project.query.all()
     return render_template('index.html',projects=projects)
     
-## project page
+# project page
 @app.route('/project/<int:id>', methods=['GET', 'POST'])
 def projectview(id):
     project = Project.query.get_or_404(id)
     return render_template('projects.html', project=project)
     
-## kanban page 
+# kanban page 
 @app.route('/kanban/<int:id>', methods = ['GET','POST'])
 def kanban(id):
     kanbans = Project.query.filter_by(id=id).first().kanbans
     id = Project.query.filter_by(id=id).first().id
     return render_template('kanban.html', kanbans=kanbans,id = id)
 
-## taskhub page
+# taskhub page
 @app.route('/tasks/<int:id>', methods = ['GET','POST'])
 def taskHub(id):
-    id = id 
+    
     if Taskhub.query.get(id):
         tasks = Taskhub.query.get(id).tasks
+    else:
+        tasks = ''
     return render_template('taskhub.html', tasks=tasks, id = id)
     
-## add project 
+# add project 
 @app.route('/addProject', methods=['POST'])
 def addProject():
     name = request.form.get('name')
@@ -94,7 +95,7 @@ def addProject():
     db.session.add(p)
     db.session.commit()
     return redirect('/')
-## add task hub
+# add task hub
 @app.route('/addhub/<int:id>', methods=['POST'])
 def addTaskHub(id):
     name = request.form.get('name')
@@ -103,7 +104,7 @@ def addTaskHub(id):
     db.session.commit()
     return redirect('/project/%s'%id)
     
-## add kanban
+# add kanban
 @app.route('/addKanban/<int:id>', methods=['POST'])
 def addKanban(id):
     kanbanName = request.form.get('kanbanName')
@@ -113,7 +114,7 @@ def addKanban(id):
     name =  Project.query.get(id).name
     return redirect('/project/%s'%id)
     
-## add todo 
+# add todo 
 @app.route('/addToDo/<int:id>', methods=['POST'])
 def addToDo(id):
     task = request.form.get('taskName')
@@ -125,7 +126,7 @@ def addToDo(id):
     id = Kanban.query.get(id).project_id
     return redirect('/kanban/%s'%id)
     
-## add task
+# add task
 @app.route('/addTask/<int:id>', methods=['POST'])
 def addTask(id):
     content = request.form.get('content')
@@ -136,7 +137,7 @@ def addTask(id):
     db.session.commit()
     return redirect('/tasks/%s'%id)
     
-## save the task progrsss
+# save the task progrsss
 @app.route('/saveTask/<int:id>', methods=['GET', 'POST'])
 def savetask(id):
     boom = ''
@@ -146,9 +147,8 @@ def savetask(id):
             db.session.commit()
     return redirect('/tasks/%s'%id)
     
-############################################################
     
-## delete project
+# delete project
 @app.route('/projectDelete/<int:id>')
 def ProjectDelete(id):
     if Project.query.first():
@@ -161,19 +161,20 @@ def ProjectDelete(id):
     db.session.delete(p)
     db.session.commit()
     return redirect('/')
-## delete taskhub
+# delete taskhub
 @app.route('/hubDelete/<int:id>')
 def taskHubDelete(id):
-    e = Taskhub.query.get(id)
-    id = e.project.id
-    tasks = e.tasks
-    for i in tasks:
-        db.session.delete(i)
-    db.session.delete(e)
-    db.session.commit()
+    if Taskhub.query.get(id):
+        e = Taskhub.query.get(id)
+        id = e.project.id
+        tasks = e.tasks
+        for i in tasks:
+            db.session.delete(i)
+        db.session.delete(e)
+        db.session.commit()
     return redirect('/project/%s'%id)
     
-## delete task
+# delete task
 @app.route('/deleteTask/<int:id>')
 def deleteTask(id):
     t = Task.query.get(id)
@@ -181,17 +182,19 @@ def deleteTask(id):
     db.session.commit()
     return redirect('/tasks/%s'%id)
 
-## task page
+# task page
 @app.route('/task/<int:id>', methods=['GET', 'POST'])
 def task_page(id):
     task = Task.query.get_or_404(id)
     return render_template('task.html', task=task)
 
-## progress saver form 
+# progress saver form 
 @app.route('/progress/<int:id>', methods=['POST'])
 def progress(id):
     task = Task.query.get(id)
-    task.progress = request.form.get('time')
+    task.progress = int(task.progress) + int(request.form.get('time'))
+    if task.progress >= task.t_range:
+        task.status = True
     db.session.commit()
     return redirect('/task/%s'%id)
 
@@ -200,5 +203,5 @@ if __name__ == '__main__':
     app.run(debug=False)
     
     
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% project management app %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# %%%%%%%%%%%% project management app %%%%%%%%%%%%%%
 

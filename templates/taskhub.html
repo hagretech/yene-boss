@@ -1,45 +1,39 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Untitled Document</title>
-    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/style_ekedHub.css">
-</head>
-
-<body>
-
-    <header>
-        <h2>task organizer</h2>
-    </header>
-     <div class="main-cont">
-            <div class="dashboard">
-                <ul>
-                    <li><a href="">rojects</a></li>
-                    <li><a href="">rojects</a></li>
-                    <li><a href="">rojects</a></li>
-                </ul>
-            </div>
-            <div class="main">
-                <div class="search">
-        <input type="text" class="taskName">
-        <i class="fa fa-search"></i>
+{% extends 'base.html' %}
+{% block body %}
+<div class="main">
+    <div class="taskhub-header">
+        <h3>tasks</h3>
+        <div class="search">
+            <input type="text" class="taskName">
+            <i class="fa fa-search"></i><i>search</i>
+        </div>
     </div>
     <div class="tasks">
         <form method='post' action='/saveTask/{{id}}'>
             <ul>
-                {% for task in tasks%}
-                <a href="/task/{{task.id}}"><li>
-                    <h4>{{task.content}} progresss {{task.progress}}</h4>
-                    <input type="checkbox" name='{{task.id}}'>
-                    <div>
-                        <a href="/deleteTask/{{task.id}}" class="btn btn-danger">delete</a>
-                    </div>
+                <li>
+                    <p class="no">id</p>
+                    <p class="name">name</p>
+                    <p class="range">range</p>
+                    <p class="pro">progress</p>
+                    <p class="content">content</p>
+                    <p class="status">status</p>
+                    <p class="delete">delete</p>
                 </li>
-                </a>
+                {% for task in tasks%}
+                <li {% if task.status == True %} class='success'{% endif %}>
+                    <p class="no">{{ task.id }}</p>
+                    <p class="name"><a href="/task/{{task.id}}">{{ task.name }}</a></p>
+                    <p class="range">{{ task.t_range }} min</p>
+                    <p class="pro">{{ task.progress }} min</p>
+                    <p class="content">{{ task.content }}</p>
+                    <p class="status">{{ task.status }}</p>
+                    <p class="delete">
+                        <a href="/deleteTask/{{task.id}}" class="btn btn-danger btn-sm">delete</a>
+                    </p>
+                </li>
                 {% endfor %}
+
             </ul>
             <div>
                 <button class="btn btn-primary" type='submit'> save </button>
@@ -48,12 +42,8 @@
     </div>
 
     <div class="addTask">
+       <h2>add</h2>
         <form method='post' action='/addTask/{{id}}'>
-            <i>add</i>
-            <div>
-                <label for="content">content</label>
-                <input id='content' type="text" name='content' class="taskName">
-            </div>
             <div>
                 <label for="name">name</label>
                 <input id='name' type="text" name='name' class="taskName">
@@ -63,17 +53,16 @@
                 <input id='t_range' type="number" name='t_range' class="taskName">
             </div>
             <div>
-                <button type='submit'>add</button>
+                <label for="content">content</label>
+                <textarea name="content" id="content" rows="4"></textarea>
+            </div>
+            <div>
+                <button type='submit' class="btn btn-success">add</button>
             </div>
         </form>
     </div>
-            </div>
-        </div>
-    
-    <script src="../static/lib/jquery/jquery.min.js">
-    </script>
-    <script src="../static/js/main_taskHub.js"></script>
+</div>
+</div>
 
-</body>
 
-</html>
+{% endblock %}
