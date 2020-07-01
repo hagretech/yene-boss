@@ -13,10 +13,10 @@
         {% for task in project.hubs%}
         <li>
 
-            <p class="no"><a href="/tasks/{{task.id}}">{{ task.id }}</a></p>
-            <p class="name"><a href="/tasks/{{task.id}}">{{ task.name }}</a></a></p>
+            <p class="no"><a href="/taskHub/{{task.id}}">{{ task.id }}</a></p>
+            <p class="name"><a href="/taskHub/{{task.id}}">{{ task.name }}</a></a></p>
             <p class="delete">
-                <a href="/hubDelete/{{project.id}}" class="btn btn-danger btn-sm">delete</a>
+                <a href="/hubDelete/{{task.id}}" class="btn btn-danger btn-sm">delete</a>
             </p>
         </li>
         {% endfor %}

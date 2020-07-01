@@ -135,7 +135,7 @@ def addTask(id):
     e = Task(content=content, name=name, t_range=t_range, hub_id = id)
     db.session.add(e)
     db.session.commit()
-    return redirect('/tasks/%s'%id)
+    return redirect('/taskHub/%s'%id)
     
 # save the task progrsss
 @app.route('/saveTask/<int:id>', methods=['GET', 'POST'])
@@ -145,20 +145,20 @@ def savetask(id):
         if request.form.get(str(i.id)) == 'on' :
             i.progress = True
             db.session.commit()
-    return redirect('/tasks/%s'%id)
+    return redirect('/taskHub/%s'%id)
     
     
 # delete project
 @app.route('/projectDelete/<int:id>')
 def ProjectDelete(id):
-    if Project.query.first():
-        p = Project.query.get(id)
-    else: 
-        return redirect('/')
-    kanbans = p.kanbans
-    for i in kanbans:
-        db.session.delete(i)    
-    db.session.delete(p)
+    project = Project.query.get_or_404(id)
+    for hub in project.hubs:
+        for i in hub.tasks:
+            db.session.delete(i)
+            db.session.commit()
+        db.session.delete(hub)
+        db.session.commit()
+    db.session.delete(project)
     db.session.commit()
     return redirect('/')
 
@@ -171,6 +171,7 @@ def taskHubDelete(id):
         tasks = e.tasks
         for i in tasks:
             db.session.delete(i)
+            db.session.commit()
         db.session.delete(e)
         db.session.commit()
     return redirect('/project/%s'%id)
@@ -181,7 +182,7 @@ def deleteTask(id):
     t = Task.query.get(id)
     db.session.delete(t)
     db.session.commit()
-    return redirect('/tasks/%s'%id)
+    return redirect('/taskHub/%s'%id)
 
 # task page
 @app.route('/task/<int:id>', methods=['GET', 'POST'])
