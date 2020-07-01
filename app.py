@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request ,redirect
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -78,7 +78,7 @@ def kanban(id):
     return render_template('kanban.html', kanbans=kanbans,id = id)
 
 # taskhub page
-@app.route('/tasks/<int:id>', methods = ['GET','POST'])
+@app.route('/taskHub/<int:id>', methods = ['GET','POST'])
 def taskHub(id):
     
     if Taskhub.query.get(id):
@@ -161,6 +161,7 @@ def ProjectDelete(id):
     db.session.delete(p)
     db.session.commit()
     return redirect('/')
+
 # delete taskhub
 @app.route('/hubDelete/<int:id>')
 def taskHubDelete(id):
