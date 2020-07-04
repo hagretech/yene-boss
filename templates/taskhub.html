@@ -26,7 +26,7 @@
                     <p class="name "><a href="/task/{{task.id}}" class="{{ task.day }}">{{ task.name }}</a></p>
                     <p class="range">{{ task.t_range }} min</p>
                     <p class="pro">{{ task.progress }} min</p>
-                    <p class="content">{{ task.content }} {{task.day}}</p>
+                    <p class="descrition">{{ task.content }}</p>
                     <p class="status">{{ task.status }}</p>
                     <p class="delete">
                         <a href="/deleteTask/{{task.id}}" class="btn btn-danger btn-sm">delete</a>
@@ -53,15 +53,15 @@
         <form method='post' action='/addTask/{{id}}'>
             <div>
                 <label for="name">name</label>
-                <input id='name' type="text" name='name' class="taskName">
+                <input id='name' type="text" name='name' class="taskName" required>
             </div>
             <div>
                 <label for="t_range">time</label>
-                <input id='t_range' type="number" name='t_range' class="taskName">
+                <input id='t_range' type="number" name='t_range' class="taskName" required>
             </div>
             <div>
                 <label for="t_range">day</label>
-                <select name="day" id="day">
+                <select name="day" id="day" value='sun'>
                     <option value="mon">mon</option>
                     <option value="tue">tue</option>
                     <option value="wed">wed</option>
@@ -80,6 +80,7 @@
             </div>
         </form>
     </div>
+    
     <div class="time-table">
         <div class="time-tabel-cont">
             <div class="mon">
