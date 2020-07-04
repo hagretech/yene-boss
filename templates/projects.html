@@ -26,12 +26,12 @@
         <input type="text" name="name">
         <button class='btn btn-primary' type='submit'>+ add</button>
     </form>
-    
+
     <hr>
     <h3>kanbans</h3>
     <hr>
-       <ul>
-       <li>
+    <ul>
+        <li>
             <p class="no">id</p>
             <p class="name">name</p>
             <p class="delete">delete</p>
@@ -45,8 +45,8 @@
                 <a href="/hubDelete/{{project.id}}" class="btn btn-danger btn-sm">delete</a>
             </p>
         </li>
-        
-        
+
+
         {% endfor %}
     </ul>
     <form method='post' action="/addKanban/{{project.id}}">
@@ -54,4 +54,13 @@
         <button class='btn btn-primary' type='submit'>+ add</button>
     </form>
 </div>
+</div>
+
+
+
+<script src="../static/lib/jquery/jquery.min.js">
+</script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/main_ekedHub.js"></script>
+<script src="../static/js/main_kanban.js"></script>
 {% endblock %}

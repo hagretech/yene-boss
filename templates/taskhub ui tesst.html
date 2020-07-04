@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+  <div class="main">
+   <div class="tasks" >
+        <ul>
+            <li><p class="mon">task1</p></li>
+            <li><p class="mon">task2</p></li>
+            <li><p class="tue">task3</p></li>
+            <li><p class="thu">task4</p></li>
+            <li><p class="wed">task5</p></li>
+            <li><p class="wed">task6</p></li>
+            <li><p class="fri">task7</p></li>
+            <li><p class="sat">task8</p></li>
+            <li><p class="sat">task9</p></li>
+            <li><p class="sat">task10</p></li>
+            <li><p class="sat">task11</p></li>
+            <li><p class="sun">task12</p></li>
+            
+        </ul>
+   </div>
+    <div class="time-table">
+        <div class="time-tabel-cont">
+            <div class="mon">
+                <p class="day">monday</p>
+                <div class="tasks">
+                    <p>task 1</p><p>task 1</p><p>task 1</p>
+                </div>
+            </div>
+            <div class="tue">
+                <p class="day">tuesday</p>
+                <div class="tasks">
+                    
+                </div>
+            </div>
+            <div class="wed">
+                <p class="day">wednesday</p>
+                <div class="tasks">
+                    <p>task 1</p>
+                </div>
+            </div>
+            <div class="thu">
+                <p class="day">thursday</p>
+                <div class="tasks">
+                    <p>task 1</p>
+                    <p>task 1</p>
+                    
+                </div>
+            </div>
+            <div class="fri">
+                <p class="day">friday</p>
+                <div class="tasks">
+                    <p>task 1</p>
+                </div>
+            </div>
+            <div class="sat">
+                <p class="day">saturday</p>
+                <div class="tasks">
+                    
+                    <p>task 1</p>
+                </div>
+            </div>
+            <div class="sun">
+                <p class="day">sunday</p>
+                <div class="tasks">
+                    <p>task 1</p>
+                    <p>task 1</p>
+                    <p>task 1</p>
+                    <p>task 1</p>
+                </div>
+            </div>
+        </div>
+        <div class="addTask">
+        <h2>add</h2>
+        <form method='post' action='/addTask/{{id}}'>
+            <div>
+                <label for="name">name</label>
+                <input id='name' type="text" name='name' class="taskName">
+            </div>
+            <div>
+                <label for="t_range">time</label>
+                <input id='t_range' type="number" name='t_range' class="taskName">
+            </div>
+            <div>
+                <label for="t_range">day</label>
+                <select name="day" id="day">
+                    <option value="mon">mon</option>
+                    <option value="tue">tue</option>
+                    <option value="wed">wed</option>
+                    <option value="thu">thu</option>
+                    <option value="fri">fri</option>
+                    <option value="sat">sat</option>
+                    <option value="sun">sun</option>
+                </select>
+            </div>
+            <div>
+                <label for="content">content</label>
+                <textarea name="content" id="content" rows="4"></textarea>
+            </div>
+            <div>
+                <button type='submit' class="btn btn-success">add</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+    <script src="../static/lib/jquery/jquery.min.js">
+    </script>
+    <script src="../static/js/main.js"></script>
+</body>
+
+</html>

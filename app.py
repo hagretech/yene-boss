@@ -53,6 +53,7 @@ class Task(db.Model):
     progress = db.Column(db.Integer, nullable=False, default=0)
     date = db.Column(db.DateTime,default=datetime.utcnow)    
     status = db.Column(db.Boolean, default=False)
+    day = db.Column(db.String(100))
     hub_id = db.Column(db.Integer, db.ForeignKey('taskhub.id'), nullable= False)
     def __repr__(self):
         return self.content
@@ -86,7 +87,7 @@ def taskHub(id):
     else:
         tasks = ''
     return render_template('taskhub.html', tasks=tasks, id = id)
-    
+ 
 # add project 
 @app.route('/addProject', methods=['POST'])
 def addProject():
@@ -132,7 +133,8 @@ def addTask(id):
     content = request.form.get('content')
     name = request.form.get('name')
     t_range = request.form.get('t_range')
-    e = Task(content=content, name=name, t_range=t_range, hub_id = id)
+    day = request.form.get('day')
+    e = Task(content=content, name = name, t_range = t_range, day = day, hub_id = id)
     db.session.add(e)
     db.session.commit()
     return redirect('/taskHub/%s'%id)
@@ -180,6 +182,7 @@ def taskHubDelete(id):
 @app.route('/deleteTask/<int:id>')
 def deleteTask(id):
     t = Task.query.get(id)
+    id = Task.query.get(id).hub_id
     db.session.delete(t)
     db.session.commit()
     return redirect('/taskHub/%s'%id)

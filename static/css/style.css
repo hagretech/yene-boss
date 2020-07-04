@@ -1,3 +1,4 @@
+
 header {
     margin-bottom: 30px;
 }
@@ -16,9 +17,10 @@ header h2 {
     z-index: 1;
 }
 
-.success{
+.success {
     background: #5da25d;
 }
+
 .main-cont {
     display: flex;
 
@@ -82,7 +84,7 @@ header h2 {
 }
 
 .main-cont .main ul li .hubs {
-    width: 10% !important;
+    width: 20% !important;
     border-right: 1px solid black;
 }
 
@@ -114,6 +116,10 @@ header h2 {
     margin: 20px 30px;
 }
 
+.main .tasks {
+    
+}
+
 /* the task style */
 .main .taskhub-header {
     display: flex;
@@ -142,37 +148,43 @@ header h2 {
     bottom: 0;
     background: #626262;
     width: 100%;
+    transition:0.5s;
+    transform: translateY(320px)
 }
 
 .main .addTask h2 {
     color: white;
+    padding-left:20px;
+    cursor: pointer;
 }
 
 .main .addTask form {
-    display: flex;
     color: black;
 }
 
 .main .addTask form div {
     display: flex;
     align-items: flex-start;
-    margin-right: 20px;
+    margin: 20px;
 }
-
+.main .addTask form div  label{
+    width: 80px;
+}
 .main .addTask form div input,
 textarea {
-    margin-left: 10px;
     background: #626262;
     border: 1px solid black
 }
 
 /* the timer style sheet */
-.task{
+.task {
     margin: 10px 30px;
 }
-.timer_cont{
+
+.timer_cont {
     width: 50%;
 }
+
 .timer {
     text-align: center;
     padding: 10px;
@@ -190,9 +202,57 @@ textarea {
     justify-content: center;
     margin: 20px;
 }
-].main .progress_form{
+
+].main .progress_form {
     display: flex;
 }
-.main .progress_form input{
+
+.main .progress_form input {
     display: none;
+}
+
+/* the weak table style */
+
+.time-tabel-cont {
+    margin: 20px 60px;
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 220px;
+}
+
+.time-tabel-cont p {
+    margin: 0;
+}
+
+.time-tabel-cont div {
+    flex-grow: 1;
+}
+
+.time-tabel-cont .day {
+    background: #c5dbc5;
+    border: 1px solid black;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-tabel-cont .tasks a {
+    border: 1px solid black;
+    display: block;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.time-tabel-cont .tasks p {
+    border: 1px solid black;
+    height: 40px;
+}
+
+
+
+.up{
+    transform: translateY(0px)!important;
 }

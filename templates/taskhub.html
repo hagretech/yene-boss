@@ -21,12 +21,12 @@
                     <p class="delete">delete</p>
                 </li>
                 {% for task in tasks%}
-                <li {% if task.status == True %} class='success'{% endif %}>
+                <li class='{% if task.status == True %} success{% endif %}'>
                     <p class="no">{{ task.id }}</p>
-                    <p class="name"><a href="/task/{{task.id}}">{{ task.name }}</a></p>
+                    <p class="name "><a href="/task/{{task.id}}" class="{{ task.day }}">{{ task.name }}</a></p>
                     <p class="range">{{ task.t_range }} min</p>
                     <p class="pro">{{ task.progress }} min</p>
-                    <p class="content">{{ task.content }}</p>
+                    <p class="content">{{ task.content }} {{task.day}}</p>
                     <p class="status">{{ task.status }}</p>
                     <p class="delete">
                         <a href="/deleteTask/{{task.id}}" class="btn btn-danger btn-sm">delete</a>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="addTask">
-       <h2>add</h2>
+        <h2>add task +</h2>
         <form method='post' action='/addTask/{{id}}'>
             <div>
                 <label for="name">name</label>
@@ -53,6 +53,18 @@
                 <input id='t_range' type="number" name='t_range' class="taskName">
             </div>
             <div>
+                <label for="t_range">day</label>
+                <select name="day" id="day">
+                    <option value="mon">mon</option>
+                    <option value="tue">tue</option>
+                    <option value="wed">wed</option>
+                    <option value="thu">thu</option>
+                    <option value="fri">fri</option>
+                    <option value="sat">sat</option>
+                    <option value="sun">sun</option>
+                </select>
+            </div>
+            <div>
                 <label for="content">content</label>
                 <textarea name="content" id="content" rows="4"></textarea>
             </div>
@@ -61,8 +73,60 @@
             </div>
         </form>
     </div>
-</div>
+    <div class="time-table">
+        <div class="time-tabel-cont">
+            <div class="mon">
+                <p class="day">monday</p>
+                <div class="tasks">
+
+                </div>
+            </div>
+            <div class="tue">
+                <p class="day">tuesday</p>
+                <div class="tasks">
+
+                </div>
+            </div>
+            <div class="wed">
+                <p class="day">wednesday</p>
+                <div class="tasks">
+
+                </div>
+            </div>
+            <div class="thu">
+                <p class="day">thursday</p>
+                <div class="tasks">
+
+
+                </div>
+            </div>
+            <div class="fri">
+                <p class="day">friday</p>
+                <div class="tasks">
+
+                </div>
+            </div>
+            <div class="sat">
+                <p class="day">saturday</p>
+                <div class="tasks">
+
+
+                </div>
+            </div>
+            <div class="sun">
+                <p class="day">sunday</p>
+                <div class="tasks">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+
+
+<script src="../static/lib/jquery/jquery.min.js">
+</script>
+<script src="../static/js/main.js"></script>
 
 {% endblock %}
