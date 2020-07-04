@@ -40,7 +40,14 @@
             </div>
         </form>
     </div>
-
+    <div class="task-list" style="display: none">
+        <ul>
+           {% for task in tasks%}
+            <a href="/task/{{task.id}}" class="{{ task.day }}">{{ task.name }}</a>
+             {% endfor %}
+        </ul>
+    </div>
+    <hr>
     <div class="addTask">
         <h2>add task +</h2>
         <form method='post' action='/addTask/{{id}}'>

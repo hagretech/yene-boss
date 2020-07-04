@@ -1,4 +1,4 @@
-let tasks = $('.tasks ul li p.name a'),
+let tasks = $('.task-list a'),
     t_mon = $('.time-tabel-cont .mon .tasks'),
     t_tue = $('.time-tabel-cont .tue .tasks'),
     t_wed = $('.time-tabel-cont .wed .tasks'),
