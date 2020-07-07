@@ -33,7 +33,6 @@ class Todo(db.Model):
     content = db.Column(db.String(1000),nullable=False)
     date = db.Column(db.DateTime,default=datetime.utcnow)
     kanban_id = db.Column(db.Integer, db.ForeignKey('kanban.id'), nullable= False)
-
     def __repr__(self):
         return self.content  
 # database models
@@ -51,7 +50,7 @@ class Task(db.Model):
     content = db.Column(db.String(1000),nullable=False)
     t_range = db.Column(db.Integer, nullable=False)
     progress = db.Column(db.Integer, nullable=False, default=0)
-    date = db.Column(db.DateTime,default=datetime.utcnow)    
+    time = db.Column(db.String(20))    
     status = db.Column(db.Boolean, default=False)
     day = db.Column(db.String(100))
     hub_id = db.Column(db.Integer, db.ForeignKey('taskhub.id'), nullable= False)
@@ -134,7 +133,8 @@ def addTask(id):
     name = request.form.get('name')
     t_range = request.form.get('t_range')
     day = request.form.get('day')
-    e = Task(content=content, name = name, t_range = t_range, day = day, hub_id = id)
+    time = request.form.get('time')
+    e = Task(content=content, name = name, t_range = t_range, day = day, time = time, hub_id = id)
     db.session.add(e)
     db.session.commit()
     return redirect('/taskHub/%s'%id)

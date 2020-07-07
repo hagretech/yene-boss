@@ -27,7 +27,7 @@
                     <p class="range">{{ task.t_range }} min</p>
                     <p class="pro">{{ task.progress }} min</p>
                     <p class="descrition">{{ task.content }}</p>
-                    <p class="status">{{ task.status }}</p>
+                    <p class="status">{{ task.status }}{{task.day}}</p>
                     <p class="delete">
                         <a href="/deleteTask/{{task.id}}" class="btn btn-danger btn-sm">delete</a>
                     </p>
@@ -42,10 +42,13 @@
     </div>
     <div class="task-list" style="display: none">
         <ul>
-           {% for task in tasks%}
-            <a href="/task/{{task.id}}" class="{{ task.day }}">{{ task.name }}</a>
-             {% endfor %}
+            {% for task in tasks%}
+            <a href="/task/{{task.id}}" class="{{ task.day }}" id="{{task.time}}">{{ task.name }}<br>{{task.time}} - {{task.time}}</a>
+            {% endfor %}
         </ul>
+    </div>
+    <div class="json">
+        {% for task in tasks%}{{task.id}}%%{{task.name}}%%{{task.day}}%%{{task.time}}%%{{task.t_range}}$and;{%endfor%}
     </div>
     <hr>
     <div class="addTask">
@@ -56,8 +59,12 @@
                 <input id='name' type="text" name='name' class="taskName" required>
             </div>
             <div>
-                <label for="t_range">time</label>
+                <label for="t_range">renge</label>
                 <input id='t_range' type="number" name='t_range' class="taskName" required>
+            </div>
+            <div>
+                <label for="time">time</label>
+                <input id='tiime' type="time" name='time' class="taskName" required>
             </div>
             <div>
                 <label for="t_range">day</label>
@@ -80,51 +87,106 @@
             </div>
         </form>
     </div>
-    
+
     <div class="time-table">
         <div class="time-tabel-cont">
             <div class="mon">
                 <p class="day">monday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
             <div class="tue">
                 <p class="day">tuesday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
             <div class="wed">
                 <p class="day">wednesday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
             <div class="thu">
                 <p class="day">thursday</p>
                 <div class="tasks">
-
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
             <div class="fri">
                 <p class="day">friday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
             <div class="sat">
                 <p class="day">saturday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
 
                 </div>
             </div>
             <div class="sun">
                 <p class="day">sunday</p>
                 <div class="tasks">
-
+                    <div class="mor">
+                        <h4>moring</h4>
+                    </div>
+                    <div class="after">
+                        <h4>afternoon</h4>
+                    </div>
+                    <div class="eve">
+                        <h4>evening</h4>
+                    </div>
                 </div>
             </div>
         </div>

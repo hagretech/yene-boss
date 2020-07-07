@@ -19,18 +19,51 @@ let tasks = $('.task-list a'),
     add_task_form_btn = $('.main .addTask h2'),
     weak_table = $('.time-tabel-cont'),
     select_day = $('.addTask form div select'),
-    name_form = $('.addTask form div #name');
+    name_form = $('.addTask form div #name'),
+    json = $('.json'),
+    Tasks = [];
+// making a tasks list with object
+json = json.html().split('$and;')
+var my = []
+for (var i = 0; i < json.length; i++) {
+    var data = json[i].split('%%')
+    var name = data[1],
+        day = data[2],
+        time = data[3],
+        o_name = 'name' + i,
+        id = data[0]
+    o_name = {
+        time: time,
+        day: day,
+        name: name,
+        id: id
+    }
+    my.push(o_name)
+}
+var time = [];
 
+for (var i = 0; i < my.length; i++) {
+    time.push(my[i].time)
+    time.sort()
+}
+for (var i = 0; i < time.length; i++) {
+    for (var l = 0; l < my.length; l++) {
+        if (time[i] == my[l].time) {
+            Tasks[i] = my[l];
+        }
+
+    }
+}
 // add task animations
 
 add_task_form_btn.on('click', function () {
     add_task_form.toggleClass('up');
 })
 
-// the add task for the weak table
+// event listner for the table click to add task
 weak_table.on('click', function (e) {
     add_task_form.toggleClass('up');
-    Array.from(select_day.children()).forEach(function(day) {
+    Array.from(select_day.children()).forEach(function (day) {
         if (day.textContent == e.target.className) {
             console.log(day)
             select_day[0]['value'] = day.textContent
@@ -40,21 +73,21 @@ weak_table.on('click', function (e) {
 })
 
 // arranging each task by its day
-for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].className == 'mon') {
-        mon.push(tasks[i])
-    } else if (tasks[i].className == 'tue') {
-        tue.push(tasks[i])
-    } else if (tasks[i].className == 'wed') {
-        wed.push(tasks[i])
-    } else if (tasks[i].className == 'thu') {
-        thu.push(tasks[i])
-    } else if (tasks[i].className == 'fri') {
-        fri.push(tasks[i])
-    } else if (tasks[i].hasClass == 'sat') {
-        sat.push(tasks[i])
-    } else if (tasks[i].className == 'sun') {
-        sun.push(tasks[i])
+for (let i = 0; i < Tasks.length; i++) {
+    if (Tasks[i].day == 'mon') {
+        mon.push(Tasks[i])
+    } else if (Tasks[i].day == 'tue') {
+        tue.push(Tasks[i])
+    } else if (Tasks[i].day == 'wed') {
+        wed.push(Tasks[i])
+    } else if (Tasks[i].day == 'thu') {
+        thu.push(Tasks[i])
+    } else if (Tasks[i].day == 'fri') {
+        fri.push(Tasks[i])
+    } else if (Tasks[i].day == 'sat') {
+        sat.push(Tasks[i])
+    } else if (Tasks[i].day == 'sun') {
+        sun.push(Tasks[i])
     }
     no_of_task = [mon.length, tue.length, wed.length, thu.length, fri.length, sat.length, sun.length].sort();
     max_row = no_of_task.reverse()[0] + 1
@@ -64,37 +97,101 @@ for (let i = 0; i < tasks.length; i++) {
 
 for (let i = 0; i < max_row; i++) {
     if (mon[i] != undefined) {
-        t_mon.append(mon[i])
+        if (mon[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+            t_mon.children()[0].innerHTML += a
+        } else if (mon[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+            t_mon.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+            t_mon.children()[2].innerHTML += a
+        }
+
     } else {
         t_mon.append('<p class="mon"></p>')
     }
     if (tue[i] != undefined) {
-        t_tue.append(tue[i])
+        if (tue[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + tue[i].id + '>' + tue[i].name + '</br>' + tue[i].time + '</a>'
+            t_tue.children()[0].innerHTML += a
+        } else if (tue[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + tue[i].id + '>' + mon[i].name + '</br>' + tue[i].time + '</a>'
+            t_tue.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + tue[i].id + '>' + tue[i].name + '</br>' + tue[i].time + '</a>'
+            t_tue.children()[2].innerHTML += a
+        }
     } else {
         t_tue.append('<p class="tue"></p>')
     }
     if (wed[i] != undefined) {
-        t_wed.append(wed[i])
+        if (wed[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + wed[i].id + '>' + wed[i].name + '</br>' + wed[i].time + '</a>'
+            t_wed.children()[0].innerHTML += a
+        } else if (wed[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + wed[i].id + '>' + wed[i].name + '</br>' + wed[i].time + '</a>'
+            t_wed.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+            t_mon.children()[2].innerHTML += a
+        }
     } else {
         t_wed.append('<p class="wed"></p>')
     }
     if (thu[i] != undefined) {
-        t_thu.append(thu[i])
+        if (thu[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+            t_thu.children()[0].innerHTML += a
+        } else if (thu[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+            t_thu.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+            t_thu.children()[2].innerHTML += a
+        }
     } else {
-        t_thu.append('<p class="tur"></p>')
+        t_thu.append('<p class="thu"></p>')
     }
     if (fri[i] != undefined) {
-        t_fri.append(fri[i])
+        if (fri[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+            t_fri.children()[0].innerHTML += a
+        } else if (fri[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+            t_fri.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+            t_fri.children()[2].innerHTML += a
+        }
     } else {
         t_fri.append('<p class="fri"></p>')
     }
     if (sat[i] != undefined) {
-        t_sat.append(sat[i])
+        if (sat[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+            t_sat.children()[0].innerHTML += a
+        } else if (sat[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+            t_sat.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+            t_sat.children()[2].innerHTML += a
+        }
     } else {
         t_sat.append('<p class="sat"></p>')
     }
     if (sun[i] != undefined) {
-        t_sun.append(sun[i])
+        if (sun[i].time.split(':')[0] <= 6) {
+            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
+            t_sun.children()[0].innerHTML += a
+        } else if (sun[i].time.split(':')[0] <= '12') {
+            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
+            t_sun.children()[1].innerHTML += a
+        } else {
+            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
+            t_mon.children()[2].innerHTML += a
+        }
     } else {
         t_sun.append('<p class="sun"></p>')
     }

@@ -236,7 +236,14 @@ textarea {
     align-items: center;
     justify-content: center;
 }
-
+.time-tabel-cont .tasks div{
+    border: 1px solid black;
+}
+.time-tabel-cont .tasks div h4{
+	background: #597693;
+    margin: 0;
+    padding: 10px
+}
 .time-tabel-cont .tasks a {
     border: 1px solid black;
     display: block;
