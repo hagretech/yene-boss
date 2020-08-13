@@ -26,12 +26,13 @@ let tasks = $('.task-list a'),
 json = json.html().split('$and;')
 var my = []
 for (var i = 0; i < json.length; i++) {
-    var data = json[i].split('%%')
-    var name = data[1],
+    var data = json[i].split('%%'),
+        name = data[1],
         day = data[2],
         time = data[3],
         o_name = 'name' + i,
         id = data[0]
+
     o_name = {
         time: time,
         day: day,
@@ -62,10 +63,10 @@ add_task_form_btn.on('click', function () {
 
 // event listner for the table click to add task
 weak_table.on('click', function (e) {
+    console.log(e.target)
     add_task_form.toggleClass('up');
     Array.from(select_day.children()).forEach(function (day) {
         if (day.textContent == e.target.className) {
-            console.log(day)
             select_day[0]['value'] = day.textContent
             name_form.focus()
         }
@@ -75,36 +76,116 @@ weak_table.on('click', function (e) {
 // arranging each task by its day
 for (let i = 0; i < Tasks.length; i++) {
     if (Tasks[i].day == 'mon') {
-        mon.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        mon.push(task)
     } else if (Tasks[i].day == 'tue') {
-        tue.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        console.log(time.split(':')[0])
+    
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        console.log(clas)
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        tue.push(task)
     } else if (Tasks[i].day == 'wed') {
-        wed.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        wed.push(task)
     } else if (Tasks[i].day == 'thu') {
-        thu.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        thu.push(task)
     } else if (Tasks[i].day == 'fri') {
-        fri.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        fri.push(task)
     } else if (Tasks[i].day == 'sat') {
-        sat.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        sat.push(task)
     } else if (Tasks[i].day == 'sun') {
-        sun.push(Tasks[i])
+        var time = Tasks[i].time,
+            clas = '',
+            task = '';
+        if (time.split(':')[0] <= 06) {
+            clas = 'mor';
+        } else if (time.split(':')[1] <= 12) {
+            clas = 'after'
+        } else {
+            clas = 'eve'
+        }
+        task = '<a href=\'/task/'+Tasks[i].id+'\'"' + clas  +'">'+Tasks[i].name +'</a>'
+        sun.push(task)
     }
     no_of_task = [mon.length, tue.length, wed.length, thu.length, fri.length, sat.length, sun.length].sort();
     max_row = no_of_task.reverse()[0] + 1
+
 }
 
-// dispalying the tasks by there day
+// dispalying the tasks by there day and time
 
 for (let i = 0; i < max_row; i++) {
     if (mon[i] != undefined) {
-        if (mon[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+        var a = mon[i],
+            time = a.split('"')[1]
+        if (time == 'mor') {
             t_mon.children()[0].innerHTML += a
-        } else if (mon[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+        }else if ( time == 'after'){
             t_mon.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
+        }else {
             t_mon.children()[2].innerHTML += a
         }
 
@@ -112,86 +193,85 @@ for (let i = 0; i < max_row; i++) {
         t_mon.append('<p class="mon"></p>')
     }
     if (tue[i] != undefined) {
-        if (tue[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + tue[i].id + '>' + tue[i].name + '</br>' + tue[i].time + '</a>'
+        var a = tue[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_tue.children()[0].innerHTML += a
-        } else if (tue[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + tue[i].id + '>' + mon[i].name + '</br>' + tue[i].time + '</a>'
+        }else if ( time == 'after'){
             t_tue.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + tue[i].id + '>' + tue[i].name + '</br>' + tue[i].time + '</a>'
+        }else {
             t_tue.children()[2].innerHTML += a
         }
     } else {
         t_tue.append('<p class="tue"></p>')
     }
     if (wed[i] != undefined) {
-        if (wed[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + wed[i].id + '>' + wed[i].name + '</br>' + wed[i].time + '</a>'
+        var a = wed[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_wed.children()[0].innerHTML += a
-        } else if (wed[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + wed[i].id + '>' + wed[i].name + '</br>' + wed[i].time + '</a>'
+        }else if ( time == 'after'){
             t_wed.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + mon[i].id + '>' + mon[i].name + '</br>' + mon[i].time + '</a>'
-            t_mon.children()[2].innerHTML += a
+        }else {
+            t_wed.children()[2].innerHTML += a
         }
+
     } else {
         t_wed.append('<p class="wed"></p>')
     }
     if (thu[i] != undefined) {
-        if (thu[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+        var a = thu[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_thu.children()[0].innerHTML += a
-        } else if (thu[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+        }else if ( time == 'after'){
             t_thu.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + thu[i].id + '>' + thu[i].name + '</br>' + thu[i].time + '</a>'
+        }else {
             t_thu.children()[2].innerHTML += a
         }
+
     } else {
         t_thu.append('<p class="thu"></p>')
     }
     if (fri[i] != undefined) {
-        if (fri[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+        var a = fri[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_fri.children()[0].innerHTML += a
-        } else if (fri[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+        }else if ( time == 'after'){
             t_fri.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + fri[i].id + '>' + fri[i].name + '</br>' + fri[i].time + '</a>'
+        }else {
             t_fri.children()[2].innerHTML += a
         }
+
     } else {
         t_fri.append('<p class="fri"></p>')
     }
     if (sat[i] != undefined) {
-        if (sat[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+        var a = sat[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_sat.children()[0].innerHTML += a
-        } else if (sat[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+        }else if ( time == 'after'){
             t_sat.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + sat[i].id + '>' + sat[i].name + '</br>' + sat[i].time + '</a>'
+        }else {
             t_sat.children()[2].innerHTML += a
         }
+
     } else {
         t_sat.append('<p class="sat"></p>')
     }
     if (sun[i] != undefined) {
-        if (sun[i].time.split(':')[0] <= 6) {
-            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
+        var a = sun[i]
+        time = a.split('"')[1]
+        if (time == 'mor') {
             t_sun.children()[0].innerHTML += a
-        } else if (sun[i].time.split(':')[0] <= '12') {
-            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
+        }else if ( time == 'after'){
             t_sun.children()[1].innerHTML += a
-        } else {
-            var a = '<a href=/task/' + sun[i].id + '>' + sun[i].name + '</br>' + sun[i].time + '</a>'
-            t_mon.children()[2].innerHTML += a
+        }else {
+            t_sun.children()[2].innerHTML += a
         }
+
     } else {
         t_sun.append('<p class="sun"></p>')
     }
